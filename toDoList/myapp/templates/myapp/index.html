@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <title>ToDoList</title>
+</head>
+<body>
+    {% block content %}
+
+    <center>
+        <h2>TO DO LIST APP</h2>
+    </center>
+        
+    <hr>
+        
+        <div class="row">
+            <div class="col-md-12 m-3">
+                <form action="/" method="POST">
+                {% csrf_token %}
+                    {{ form }}
+                    <button class="btn btn-outline-primary m-3 btn-sm">ADD TASK</button>
+                </form>
+            </div>
+        </div>
+    <hr>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Task</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">Due Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for data in task_data %}
+                      <tr>
+                        <th scope="row">{{ data.task }}</th>
+                        <td>{{ data.description }}</td>
+                        <td>{{ data.start_date }}</td>
+                        <td>{{ data.due_date }}</td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="container">
+        <div class="row">
+            <div class="d-grid gap-2 col-6 mx-auto m-2">
+                <a class="btn btn-warning" href="delete/">Delete all Tasks</a>
+            </div>
+        </div>
+    </div>
+
+
+    {% endblock content %}
+</body>
+</html>
